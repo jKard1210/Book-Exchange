@@ -1,0 +1,48 @@
+<!doctype html>
+
+
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; background-image: url("http://i.imgur.com/IFcqIOS.jpg"); opacity: 80% }
+        h3 { text-align: center; margin-bottom: 10px; }
+        form {text-align: center;}
+        label {padding-right: 25px; padding-left: 25px; text-size: 40px;}
+        .subButton {margin-top: 15px;}
+        
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class = "text-center">
+     <a href="/logout" class="btn btn-default btn-sm" style= "width: 150px;">Logout</a>
+     <a href= "/create" class = "btn btn-default btn-sm" style = "width: 150px"> Create New Poll</a>
+     </div>
+    <div class="page-header text-center">
+        <h1 style = "color: maroon" id = "polls"><span class="fa"></span> Polls</h1>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+
+           
+                    
+                    
+                    <% entries = data.map(function(elem) {
+    return '<div class = "well"> <h3>' + elem.title + '</h3><form action="/respond/' + elem._id + '" method="get"><label><input type="radio" name="option" value="a1">' +  elem.r1 + '</label><label> <input type="radio" name="option" value="a2">' +  elem.r2 + '</label><br><label><input type="radio" name="option"  value="a3">' +  elem.r3 + '</label><label><input type="radio" name="option"  value="a4">' +  elem.r4 + '</label><br><input class = "subButton" type="submit" value="Submit"></form></div>';
+}) -%>
+<p><%- entries.join("") %></p>
+
+            
+
+    </div>
+
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+</body>
+</html>
