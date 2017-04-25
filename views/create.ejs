@@ -4,40 +4,35 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
-        body        { padding-top:80px; word-wrap:break-word; background-image: url("http://i.imgur.com/IFcqIOS.jpg"); opacity: 80% }
+        body        { padding-top:80px; word-wrap:break-word; background-image: url("http://fungyung.com/data/out/2/63203543-aesthetic-wallpapers.png"); opacity: 80% }
+        h3 { text-align: center; margin-bottom: 10px; }
+        img {display: block; margin-left: auto; margin-right: auto;}
     </style>
 </head>
 <body>
 <div class="container">
 
     <div class="page-header text-center">
-        <h1><span class="fa"></span> New Poll</h1>
+        <h1><span class="fa"></span>My Books</h1>
     </div>
 
-    <form action = "/sendPoll" method = "get">
-        <div class="form-group" style = "margin-bottom: 100px">
-            <label>Question</label>
-            <input type="text" class="form-control" name="question">
+    <form action = "/addBook" method = "get" style = "margin-bottom: 50px">
+        <div class="form-group text-center">
+            <input type="text" class="form-control" name="book1" title = "Add Book">
+            <input class = "subButton" type="submit" value="Add" style = "float: right; margin-top: 10px">
         </div>
-        <div class="form-group">
-            <label>Option 1</label>
-            <input type="r1" class="form-control" name="r1">
-        </div>
-        <div class="form-group">
-            <label>Option 2</label>
-            <input type="r2" class="form-control" value = "" name="r2">
-        </div>
-         <div class="form-group">
-            <label>Option 3</label>
-            <input type="r3" class="form-control" value = "" name="r3">
-        </div>
-         <div class="form-group">
-            <label>Option 4</label>
-            <input type="r4" class="form-control" value = ""name="r4">
-        </div>
-        <input class = "subButton" type="submit" value="Submit">
     </form>
+    
+    
+    <div class="row">
+    <% entries = data.map(function(elem) {
+    return '<div class = "well" style = "margin-top: 20px"> <h3>' + elem.title + '</h3><img src="' + elem.imgUrl + '></img></div>';
+}) -%>
+<p><%- entries.join("") %></p>
+</div>
 
 </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
 </body>
 </html>

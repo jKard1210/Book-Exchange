@@ -4,22 +4,15 @@ var mongoose = require('mongoose');
         var db = require('../../config/database.js');
         
         var Schema = mongoose.Schema;
-         var pollSchema = new Schema({
+         var bookSchema = new Schema({
                 title: String,
-                num: Number,
-                r1: String,
-                a1: Number,
-                r2: String,
-                a2: Number,
-                r3: String,
-                a3: Number,
-                r4: String,
-                a4: Number,
+                author: String,
+                imgUrl: String,
+                user: String,
          });
 
-        var poll = mongoose.model('polls', pollSchema);
-        
-        var yelpData;
+        var book = mongoose.model('books', bookSchema);
+        var books = require('google-books-search');
         
 
     app.get('/', function(req, res) {
@@ -56,9 +49,8 @@ app.post('/login', passport.authenticate('local-login', {
     app.get('/home', isLoggedIn, function(req, res) {
 
 
-        poll.find({}, function(err, data){
+        book.find({}, function(err, data){
         if (err) console.log(err);
-        console.log(">>>> " + data);
         res.render('home.ejs', {
             user: req.user,
             data: data
@@ -68,64 +60,15 @@ app.post('/login', passport.authenticate('local-login', {
     });
     
     app.get('/create', isLoggedIn, function(req, res) {
-        res.render('create.ejs', {
-            user: req.user
+        book.find({user: req.user.local.email}, function(err, data) {
+            if (err) console.log(err);
+            res.render('create.ejs', {
+            user: req.user,
+            data: data
         });
+        })
     });
     
-    app.get('/respond/:id', isLoggedIn, function(req, res) {
-        var id =req.params.id;
-        var r = req.query.option.valueOf();
-        var pollObject;
-        console.log(r);
-        if (r == "a1") {
-        poll.findOneAndUpdate({'_id': id}, {$inc: { "a1" : 1}}, function(err, data) {
-            if (err) console.log(err);
-            console.log(data);
-           pollObject = data;
-           res.render('pollView.ejs', {
-                    data: pollObject
-                    
-                })
-        });
-        }
-        else if (r == "a2") {
-        poll.findOneAndUpdate({'_id': id}, {$inc: { "a2" : 1}}, function(err, data) {
-            if (err) console.log(err);
-            console.log(data);
-             pollObject = data;
-             res.render('pollView.ejs', {
-                    data: pollObject
-                    
-                })
-        });
-        }
-        else if (r == "a3") {
-        poll.findOneAndUpdate({'_id': id}, {$inc: { "a3" : 1}}, function(err, data) {
-            if (err) console.log(err);
-            console.log(data);
-             pollObject = data;
-             res.render('pollView.ejs', {
-                    data: pollObject
-                    
-                })
-        });
-        }
-        else if (r == "a4") {
-        poll.findOneAndUpdate({'_id': id}, {$inc: { "a4" : 1}}, function(err, data) {
-            if (err) console.log(err);
-            console.log(data);
-             pollObject = data;
-             res.render('pollView.ejs', {
-                    data: pollObject
-                    
-                })
-        });
-        }
-
-
-            
-            })
     
     
     app.get('/account', isLoggedIn, function(req, res) {
@@ -140,26 +83,39 @@ app.post('/login', passport.authenticate('local-login', {
         res.redirect('/');
     });
     
-    app.get('/sendPoll', function(req, res) {
+    app.get('/addBook', isLoggedIn, function(req, res) {
+        var book1 = req.query.book1;
+        var bookTitle = "";
+        var author = "";
+        var imgUrl = "";
+        var user = req.user.local.email;
+        books.search(book1, function(error, results) {
+    if ( ! error ) {
+        bookTitle = results[0].title;
+        author = results[0].author;
+        imgUrl = results[0].thumbnail;
+        console.log(results);
+    } else {
+        console.log(error);
+    }
+});
 
-        var newPoll = new poll({
-            "title" : req.query.question,
-            "r1": req.query.r1,
-            "r2": req.query.r2,
-            "r3": req.query.r3,
-            "r4": req.query.r4,
-            "a1": 0,
-            "a2": 0,
-            "a3": 0,
-            "a4": 0,
+setTimeout(function() {
+        
+        var newBook = new book({
+            "title" : bookTitle,
+            "author": author,
+            "imgUrl": imgUrl,
+            "user": user,
         });
-        newPoll.save(function(err) {
+        newBook.save(function(err) {
                     if (err)
                         throw err;
-                    return newPoll;
+                    return newBook;
                 });
         
-        res.redirect("/home");
+        res.redirect("/create");
+}, 1000);
     });
     
    

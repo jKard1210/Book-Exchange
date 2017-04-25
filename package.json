@@ -1,7 +1,7 @@
 {
-  "name": "voting_app",
+  "name": "book_trading",
   "version": "2.0.0",
-  "description": "A voting app",
+  "description": "A book trading app",
   "main": "server.js",
   "dependencies": {
     "async": "^2.2.0",
