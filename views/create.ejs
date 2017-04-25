@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
         body        { padding-top:80px; word-wrap:break-word; background-image: url("http://fungyung.com/data/out/2/63203543-aesthetic-wallpapers.png"); opacity: 80% }
-        h3 { text-align: center; margin-bottom: 10px; }
-        img {display: block; margin-left: auto; margin-right: auto;}
+        img { vertical-align: middle; margin-right: 15px;}
+        cover {    display: inline-block; margin-right: 10px;}
     </style>
 </head>
 <body>
@@ -26,7 +26,7 @@
     
     <div class="row">
     <% entries = data.map(function(elem) {
-    return '<div class = "well" style = "margin-top: 20px"> <h3>' + elem.title + '</h3><img src="' + elem.imgUrl + '></img></div>';
+    return '<div class = "cover"><img src="' + elem.imgUrl + '></img></div>';
 }) -%>
 <p><%- entries.join("") %></p>
 </div>

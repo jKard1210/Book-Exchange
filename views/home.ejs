@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
         body        { padding-top:80px; word-wrap:break-word; background-image: url("http://fungyung.com/data/out/2/63203543-aesthetic-wallpapers.png"); opacity: 80% }
-        h3 { text-align: center; margin-bottom: 10px; }
         form {text-align: center;}
         label {padding-right: 25px; padding-left: 25px; text-size: 40px;}
         .subButton {margin-top: 15px;}
-        img {display: block; margin-left: auto; margin-right: auto;}
-        
+        img {vertical-align: middle; margin-right: 15px;}
+         .cover {    display: inline-block; }
+         .fa { display: inline-block;}
+         .close { float: none; vertical-align: top; margin-left: -20px;color: #dc143c; opacity: .5;}
+
     </style>
 </head>
 <body>
@@ -34,7 +36,7 @@
                     
                     
                     <% entries = data.map(function(elem) {
-    return '<div class = "well"> <h3>' + elem.title + '</h3><img src="' + elem.imgUrl + '></img></div>';
+    return '<div class = "cover"><img src="' + elem.imgUrl + '></img><button class = "close"><i class = "fa">hey</i></button></div>';
 }) -%>
 <p><%- entries.join("") %></p>
 
