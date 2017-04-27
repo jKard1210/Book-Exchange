@@ -1,5 +1,3 @@
-<!doctype html>
-
 
 <html>
 <head>
@@ -23,10 +21,30 @@
     <div class = "text-center">
      <a href="/logout" class="btn btn-default btn-sm" style= "width: 150px;">Logout</a>
      <a href= "/create" class = "btn btn-default btn-sm" style = "width: 150px">My Books</a>
-     <a href= "/trades" class = "btn btn-default btn-sm" style = "width: 150px">My Trades</a>
+     <a href= "/home" class = "btn btn-default btn-sm" style = "width: 150px">All Books</a>
      </div>
     <div class="page-header text-center">
-        <h1 style = "color: maroon" id = "polls"><span class="fa"></span>Available Books</h1>
+        <h1 style = "color: maroon" id = "polls"><span class="fa"></span>Your Trade Requests</h1>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+
+           
+                    
+                    
+                    <% entries = data.map(function(elem) {
+    return '<div class = "cover"><img src="' + elem.imgUrl + '></img><button class = "close"><i class = "fa">hey</i></button></div>';
+}) -%>
+<p><%- entries.join("") %></p>
+
+            
+
+    </div>
+    
+    <div class="page-header text-center">
+        <h1 style = "color: maroon" id = "polls"><span class="fa"></span>Trade Requests for You</h1>
     </div>
 
     <div class="row">
