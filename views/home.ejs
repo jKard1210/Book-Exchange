@@ -7,13 +7,21 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
         body        { padding-top:80px; word-wrap:break-word; background-image: url("http://fungyung.com/data/out/2/63203543-aesthetic-wallpapers.png"); opacity: 80% }
-        form {text-align: center;}
-        label {padding-right: 25px; padding-left: 25px; text-size: 40px;}
-        .subButton {margin-top: 15px;}
-        img {vertical-align: middle; margin-right: 15px;}
-         .cover {    display: inline-block; }
+        form {vertical-align: top;}
+        img {vertical-align: middle; position: relative; margin-right: 15px;}
+         .img-holder {    display: inline-block; position: relative;}
          .fa { display: inline-block;}
-         .close { float: none; vertical-align: top; margin-left: -20px;color: #dc143c; opacity: .5;}
+         .cover {
+             margin-bottom: 15px;
+         }
+         .cover .close {  float: none;
+    vertical-align: top;
+    margin-left: 20px;
+    background-color: gray;
+    color: #dc143c;
+    opacity: .5;
+    margin-top: 5px;
+         }
 
     </style>
 </head>
@@ -37,7 +45,7 @@
                     
                     
                     <% entries = data.map(function(elem) {
-    return '<div class = "cover"><img src="' + elem.imgUrl + '></img><button class = "close"><i class = "fa">hey</i></button></div>';
+    return '<div class = "cover img-holder"><img src="' + elem.imgUrl + '"/><a><form action = "/reqTrade/' + elem.title + '"><button class = "close">Trade</button></form></a></div>';
 }) -%>
 <p><%- entries.join("") %></p>
 

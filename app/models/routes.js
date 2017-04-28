@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
                 author: String,
                 imgUrl: String,
                 user: String,
-                request: String
+                requests: Array
          });
          
 
@@ -94,7 +94,7 @@ app.post('/login', passport.authenticate('local-login', {
 
 app.get('/reqTrade/:book', isLoggedIn, function(req, res) {
     var title = req.params.book;
-    book.findOneAndUpdate({'title': title}, {push: { "requests" : req.user.local.email}}, function(err, data) {
+    book.findOneAndUpdate({'title': title}, {$push: { "requests" : req.user.local.email}}, function(err, data) {
             if (err) console.log(err);
             res.redirect('/home');
             
@@ -131,7 +131,7 @@ setTimeout(function() {
             "author": author,
             "imgUrl": imgUrl,
             "user": user,
-            "requests": ""
+            "requests": []
         });
         newBook.save(function(err) {
                     if (err)
