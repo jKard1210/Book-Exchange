@@ -12,6 +12,7 @@
          .cover {    display: inline-block; }
          .fa { display: inline-block;}
          .close { float: none; vertical-align: top; margin-left: -20px;color: #dc143c; opacity: .5;}
+         figcaption { text-align: center;}
 
     </style>
 </head>
@@ -34,10 +35,10 @@
            
                     
                     
-                    <% entries = inTrades.map(function(elem) {
-    return '<div class = "cover"><img src="' + elem.imgUrl + '></img><button class = "close"><i class = "fa">hey</i></button></div>';
+                    <% entries1 = outTrades.map(function(elem) {
+    return '<div class = "cover"><img src="' + elem.imgUrl + '></img><button class = "close"><i class = "fa"></i></button></div>';
 }) -%>
-<p><%- entries.join("") %></p>
+<p><%- entries1.join("") %></p>
 
             
 
@@ -55,7 +56,7 @@
                     
                     
                     <% entries = inTrades.map(function(elem) {
-    return '<div class = "cover"><img src="' + elem.imgUrl + '></img><button class = "close"><i class = "fa">hey</i></button></div>';
+    return '<div class = "cover"><img src="' + elem.imgUrl + '></img><button class = "close"><figcaption>' + elem.requests[0] + '</figcaption></button></div>';
 }) -%>
 <p><%- entries.join("") %></p>
 

@@ -82,7 +82,7 @@ app.post('/login', passport.authenticate('local-login', {
     app.get('/trades', isLoggedIn, function(req,res) {
         book.find({user: req.user.local.email}, function(err, data) {
             if (err) console.log(err);
-            book.find({requests: {$elemMatch: req.user.local.email}}, function(err, data2) {
+            book.find({requests: req.user.local.email}, function(err, data2) {
             if (err) console.log(err);  
             res.render('trades.ejs', {
             user: req.user,
